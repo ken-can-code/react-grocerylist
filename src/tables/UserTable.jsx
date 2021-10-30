@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 
 const UserTable = (props) => (
@@ -16,8 +18,20 @@ const UserTable = (props) => (
             <td>{user.name}</td>
             <td>{user.username}</td>
             <td>
-              <button type="button" className="button muted-button">Edit</button>
-              <button type="button" className="button muted-button">Delete</button>
+              <button
+                type="button"
+                onClick={() => props.editRow(user)}
+                className="button muted-button"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={() => props.deleteUser(user.id)}
+                className="button muted-button"
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))
