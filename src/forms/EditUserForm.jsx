@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EditUserForm = (props) => {
+  useEffect(() => {
+    setUser(props.currentUser);
+  }, [props.currentUser]);
   const [user, setUser] = useState(props.currentUser);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setUser({ ...user, [name]: value });
   };
 
@@ -13,7 +15,9 @@ const EditUserForm = (props) => {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-
+        if (user.name.length < 1 || user.username.length < 1) {
+          return;
+        }
         props.updateUser(user.id, user);
       }}
     >
@@ -31,7 +35,11 @@ const EditUserForm = (props) => {
         value={user.username}
         onChange={handleInputChange}
       />
-      <button type="button">Update user</button>
+      <button
+        type="submit"
+      >
+        Update user
+      </button>
       <button
         type="button"
         onClick={() => props.setEditing(false)}

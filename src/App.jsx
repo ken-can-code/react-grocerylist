@@ -4,15 +4,15 @@ import AddUserForm from './forms/AddUserForm';
 import EditUserForm from './forms/EditUserForm';
 
 const App = () => {
-  const usersData = [
-    { id: 1, name: 'Tania', username: 'floppydiskette' },
+  const initialUsersData = [
+    { id: 1, name: 'Ken', username: 'poshgreentea' },
     { id: 2, name: 'Craig', username: 'siliconeidolon' },
     { id: 3, name: 'Ben', username: 'benisphere' },
   ];
 
   const initialFormState = { id: null, name: '', username: '' };
 
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState(initialUsersData);
   const [editing, setEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState(initialFormState);
 
@@ -39,6 +39,7 @@ const App = () => {
 
   const deleteUser = (id) => {
     setUsers(users.filter((user) => user.id !== id));
+    setEditing(false);
   };
 
   return (
